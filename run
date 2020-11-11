@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# navigate to source
+cd ./fonte &&
+
+# compile
+javac Main.java &&
+
+# run
+java Main
+
+# return to previous dir
+cd ..
