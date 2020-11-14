@@ -7,7 +7,8 @@ cd ./fonte &&
 javac Main.java &&
 
 # run
-java Main
+java Main ../exemplos/teste2.el
+# java Main
 
 # return to previous dir
 cd ..
