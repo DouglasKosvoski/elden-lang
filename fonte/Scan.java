@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Scan {
-  private String filename;
+  private String filename, VariableStr = "summon";
   // private String filename;
 
   public Scan() {
@@ -34,10 +34,22 @@ public class Scan {
       input = new Scanner(file);
       while (input.hasNextLine()) {
         String line = input.nextLine();
+       
         System.out.println(line);
-      }
+       
+        if (line.contains("summon")){
+          System.out.println("Creating a variable");
+          Variable n = new Variable();
+          String Line = n.createVariable(line);
+          System.out.println(Line);
+        
+        } else {
+          System.out.println("Summon was not there...");
+        }
+        
+        }
       input.close();
-
+    
     } catch (Exception e) {
       e.printStackTrace();
     }
