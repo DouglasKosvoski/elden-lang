@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
   public static void main(String[] args) {
     // verifica se algum argumento foi passado ao programa
@@ -19,7 +21,12 @@ public class Main {
 
     // le o arquivo
     Scan scan = new Scan(filename);
-    scan.read();
+    ArrayList conteudo = scan.read(false);
+    // 2dArray = scan.format(conteudo);
+
+    // Parser parser = new Parser(conteudo);
+    // parser.show();
+
   }
 
   private static Boolean verificaExtensao(String arquivo) {
