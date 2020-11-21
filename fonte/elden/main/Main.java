@@ -1,6 +1,7 @@
 package fonte.elden.main;
 
 import java.util.ArrayList;
+import fonte.elden.main.Leitor;
 
 public class Main {
   public static void main(String[] args) {
@@ -16,8 +17,10 @@ public class Main {
     }
 
     // le o arquivo
-    Scan scan = new Scan(filename);
-    ArrayList conteudo = scan.read(false);
+    Leitor scan = new Leitor(filename);
+    System.out.println("Nome do Arq: " + scan.getNomeDoArquivo());
+    // retorna um ArrayList de strings
+    System.out.println("Conteudo do Arq: " + scan.getConteudoAnalisado());
 
   }
 
