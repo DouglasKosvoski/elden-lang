@@ -1,3 +1,5 @@
+package fonte.elden.main;
+
 import java.util.ArrayList;
 
 public class Main {

@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 
-# navigate to source
-cd ./fonte &&
+# compila
+javac ./fonte/elden/main/*.java &&
 
-# compile
-javac Main.java &&
-
-# run
-java Main ../exemplos/teste2.el
-# java Main
-
-# return to previous dir
-cd ..
+# roda com o arquivo como argumento
+java fonte.elden.main.Main ./exemplos/teste2.el
