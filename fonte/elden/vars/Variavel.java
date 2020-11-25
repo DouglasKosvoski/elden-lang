@@ -4,6 +4,10 @@ public class Variavel {
   private String nome;
   private String tipo;
 
+  public Variavel() {
+    this.setTipo("undefined");
+    this.setNome("undefined");
+  }
   public Variavel(String nome, String tipo) {
     this.setTipo(tipo);
     this.setNome(nome);

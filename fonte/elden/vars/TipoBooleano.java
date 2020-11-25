@@ -4,6 +4,10 @@ public class TipoBooleano extends Variavel {
   private boolean valorLogico;
 
   // Construtor
+  public TipoBooleano() {
+    super("undefined", "Booleano");
+    this.setValor(false);
+  }
   public TipoBooleano(String nome, String valorLogico) {
     super(nome, "Booleano");
     this.setValor(valorLogico);

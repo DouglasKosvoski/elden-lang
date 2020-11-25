@@ -4,6 +4,10 @@ public class TipoString extends Variavel {
 	private String valor;
 
 	// Construtor
+  public TipoString() {
+    super("undefined", "String");
+		this.setValor(null);
+  }
   public TipoString(String nome, String valor) {
     super(nome, "String");
 		this.setValor(valor);

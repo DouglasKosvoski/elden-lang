@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
-# compila
-javac ./fonte/elden/main/*.java &&
+compila() {
+	javac ./fonte/elden/main/*.java
+}
 
-# roda com o arquivo como argumento
-java fonte.elden.main.Main ./exemplos/teste2.el
+roda() {
+	java fonte.elden.main.Main $1
+}
+
+compila
+roda $1

@@ -4,6 +4,11 @@ public class TipoInteiro extends Variavel {
 	private int valor;
 
 	// Construtor
+  public TipoInteiro() {
+    super();
+		this.setValor(0);
+		this.setTipo("int");
+  }
   public TipoInteiro(String nome) {
     super(nome, "Inteiro");
 		this.setValor(0);

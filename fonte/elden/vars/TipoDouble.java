@@ -4,6 +4,10 @@ public class TipoDouble extends Variavel {
 	private double value;
 
 	// Construtor
+  public TipoDouble() {
+		super("undefined", "Double");
+		this.setValor(0);
+  }
   public TipoDouble(String nome) {
 		super(nome, "Double");
 		this.setValor(0);
