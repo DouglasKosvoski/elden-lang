@@ -26,4 +26,8 @@ public class TipoString extends Variavel {
 	public String getValor() {
 		return this.valor;
 	}
+
+  public Boolean Compare(String s) {
+    return (this.valor.equals(s));
+  }
 }

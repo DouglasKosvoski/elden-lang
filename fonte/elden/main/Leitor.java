@@ -81,7 +81,15 @@ public class Leitor {
       // Math Operations
       if(startWithUpperCase(linhaSplit[0])) {
         // value which will be used to modify the original variable value
-        int valor = linhaSplit[3].replace(".", "").length();
+        int valor = 0;
+        String valor1 = "";
+
+        if(linhaSplit.length > 3) {
+          valor = linhaSplit[3].replace(".", "").length();
+        }
+        else {
+          valor1 = linhaSplit[2].replace(".", "");
+        }
 
         Variavel A = new Variavel();
 
@@ -91,8 +99,12 @@ public class Leitor {
         else if (this.vDouble.containsKey(linhaSplit[0])) {
           A.setTipo(this.vDouble.get(linhaSplit[0]).getTipo());
         }
-
-        // System.out.println("Tipo: " + A.getTipo());
+        else if (this.vString.containsKey(linhaSplit[0])) {
+          A.setTipo(this.vString.get(linhaSplit[0]).getTipo());
+        }
+        else if (this.vBoolean.containsKey(linhaSplit[0])) {
+          A.setTipo(this.vBoolean.get(linhaSplit[0]).getTipo());
+        }
 
         // Math Operations
         switch(linhaSplit[1]) {
@@ -141,7 +153,6 @@ public class Leitor {
             }
             break;
 
-
           // division
           case "weaken":
             if(valor == 0) {
@@ -163,8 +174,31 @@ public class Leitor {
 
           // comparision
           case "matches":
-            System.out.println(linhaSplit[0] + " == " + (linhaSplit[2].length()-1));
-            break;
+            switch(A.getTipo()) {
+              case "int":
+                Boolean asd = this.vInt.get(linhaSplit[0]).Compare(valor1.length());
+                System.out.println(asd);
+                break;
+
+              case "Double":
+                Boolean asd1 = this.vDouble.get(linhaSplit[0]).Compare(valor1.length());
+                System.out.println(asd1);
+                break;
+
+              case "String":
+                Boolean asd2 = this.vString.get(linhaSplit[0]).Compare(valor1);
+                System.out.println(asd2);
+                break;
+
+              case "Booleano":
+                Boolean asd3 = this.vBoolean.get(linhaSplit[0]).Compare(valor1);
+                System.out.println(asd3);
+                break;
+
+              default:
+                break;
+              }
+              break;
 
           default:
             System.out.println("Error at line: " + (i+1) + " Unknown Expression: " + linha);
@@ -213,25 +247,21 @@ public class Leitor {
           if (this.vInt.containsKey(linhaSplit[1])) {
             int valor = linhaSplit[3].replace(".", "").length();
             this.vInt.get(linhaSplit[1]).setValor(valor);
-            // System.out.println(linhaSplit[1] + " \t: int" + "\t: valor: " + this.vInt.get(linhaSplit[1]).getValor());
           }
 
           else if (this.vDouble.containsKey(linhaSplit[1])) {
             int valor = linhaSplit[3].replace(".", "").length();
             this.vDouble.get(linhaSplit[1]).setValor(valor);
-            // System.out.println(linhaSplit[1] + " \t: double" + "\t: valor: " + this.vDouble.get(linhaSplit[1]).getValor());
           }
 
           else if (this.vString.containsKey(linhaSplit[1])) {
             String valor = linhaSplit[3].replace(".", "");
             this.vString.get(linhaSplit[1]).setValor(valor);
-            // System.out.println(linhaSplit[1] + " \t: string" + "\t: valor: " + this.vString.get(linhaSplit[1]).getValor());
           }
 
           else if (this.vBoolean.containsKey(linhaSplit[1])) {
             String valor = linhaSplit[3].replace(".", "");
             this.vBoolean.get(linhaSplit[1]).setValor(valor);
-            // System.out.println(linhaSplit[1] + " \t: boolean" + "\t: valor: " + this.vBoolean.get(linhaSplit[1]).getValor());
           }
           break;
 

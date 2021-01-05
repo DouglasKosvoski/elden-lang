@@ -25,4 +25,8 @@ public class TipoBooleano extends Variavel {
   public void setValor(String valorLogico) {
     this.valorLogico = Boolean.parseBoolean(valorLogico);
   }
+
+  public Boolean Compare(String s) {
+    return (this.valorLogico == Boolean.parseBoolean(s));
+  }
 }

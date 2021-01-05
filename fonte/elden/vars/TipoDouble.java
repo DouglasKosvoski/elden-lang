@@ -50,4 +50,11 @@ public class TipoDouble extends Variavel {
   public void Divide(double a) {
     this.setValor(this.valor / a);
   }
+  public Boolean Compare(int a) {
+    return (this.valor == a);
+  }
+  public Boolean Compare(double a) {
+    return (this.valor == a);
+  }
+
 }
