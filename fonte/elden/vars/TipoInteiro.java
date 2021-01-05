@@ -34,4 +34,17 @@ public class TipoInteiro extends Variavel {
   public int getValor() {
     return this.valor;
   }
+
+  public void Increase(int a) {
+    this.setValor(this.valor + a);
+  }
+  public void Decrease(int a) {
+    this.setValor(this.valor - a);
+  }
+  public void Multiply(int a) {
+    this.setValor(this.valor * a);
+  }
+  public void Divide(int a) {
+    this.setValor(this.valor / a);
+  }
 }

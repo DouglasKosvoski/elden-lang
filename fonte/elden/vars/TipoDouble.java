@@ -1,7 +1,7 @@
 package fonte.elden.vars;
 
 public class TipoDouble extends Variavel {
-	private double value;
+	private double valor;
 
 	// Construtor
   public TipoDouble() {
@@ -27,14 +27,27 @@ public class TipoDouble extends Variavel {
 
 	// Getters
   public double getValor() {
-    return this.value;
+    return this.valor;
   }
 
 	// Setters
 	public void setValor(String valor) {
-		this.value = Double.parseDouble(valor);
+		this.valor = Double.parseDouble(valor);
 	}
 	public void setValor(double valor) {
-		this.value = valor;
+		this.valor = valor;
 	}
+
+  public void Increase(double a) {
+    this.setValor(this.valor + a);
+  }
+  public void Decrease(double a) {
+    this.setValor(this.valor - a);
+  }
+  public void Multiply(double a) {
+    this.setValor(this.valor * a);
+  }
+  public void Divide(double a) {
+    this.setValor(this.valor / a);
+  }
 }

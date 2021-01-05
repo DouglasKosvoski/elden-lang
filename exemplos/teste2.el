@@ -1,16 +1,21 @@
-summon int Crack.
-summon double Creu.
+summon int A.
+summon double B.
 
-summon string Shhhh.
+cast A as candy.
+cast B as candy.
 
-summon boolean Nhon.
+//reveal A.
+//reveal B.
 
+//A ascend by wind.
+//A descend by lava.
+//A strengthen by water.
+//A weaken by fire.
 
-cast Crack as candy.
+//B ascend by wind.
+//B descend by lava.
+//B strengthen by water.
+//B weaken by fire.
 
-
-cast Creu as nonetheless.
-cast Shhhh as rollercoster.
-
-
-cast Nhon as true.
+reveal A.
+reveal B.

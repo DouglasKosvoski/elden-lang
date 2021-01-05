@@ -10,13 +10,10 @@ public class Main {
 
     // criado o nome do arquivo a partir do primeiro argumento
     String filename = args[0];
-
     if(!verificaExtensao(filename)) {
       return;
     }
-
     Testes(filename);
-
   }
 
   private static void Testes(String filename) {
