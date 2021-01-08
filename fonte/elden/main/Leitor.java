@@ -11,10 +11,10 @@ public class Leitor {
   private String filename;
   private Scanner conteudo;
   ArrayList<String> conteudoAnalisado = new ArrayList<String>();
-  HashMap<String, TipoInteiro>  vInt     = new HashMap<String, TipoInteiro>();
-  HashMap<String, TipoDouble>   vDouble  = new HashMap<String, TipoDouble>();
-  HashMap<String, TipoString>   vString  = new HashMap<String, TipoString>();
-  HashMap<String, TipoBooleano> vBoolean = new HashMap<String, TipoBooleano>();
+  HashMap<String, TipoInteiro>  HMint     = new HashMap<String, TipoInteiro>();
+  HashMap<String, TipoDouble>   HMdouble  = new HashMap<String, TipoDouble>();
+  HashMap<String, TipoString>   HMstring  = new HashMap<String, TipoString>();
+  HashMap<String, TipoBooleano> HMboolean = new HashMap<String, TipoBooleano>();
 
   // Constructors
   public Leitor(String filename) {
@@ -67,232 +67,242 @@ public class Leitor {
       return (Character.isUpperCase(s.codePointAt(0)));
     }
   }
+  public Boolean verificaContinuidadeLinha(String linha) {
+    // Retorna TRUE quando a linha esta nos conformes do programa, se nao retorna False
+    return (linha.startsWith("//") || linha.endsWith(".") == false || linha.length() < 1);
+  }
+
+  public void mathOperations(String[] linha, int linhaIndex) {
+    linhaIndex += 1;
+    int valorNumerico = 0;
+    String valorString = "";
+    String varName = linha[0];
+    String operation = linha[1];
+
+    Variavel variavelGenerica = new Variavel();
+
+    // verifica qual HM contem a varivel
+    if (this.HMint.containsKey(varName)) {
+      variavelGenerica.setTipo(this.HMint.get(varName).getTipo());
+    }
+    else if (this.HMdouble.containsKey(varName)) {
+      variavelGenerica.setTipo(this.HMdouble.get(varName).getTipo());
+    }
+    else if (this.HMstring.containsKey(varName)) {
+      variavelGenerica.setTipo(this.HMstring.get(varName).getTipo());
+    }
+    else if (this.HMboolean.containsKey(varName)) {
+      variavelGenerica.setTipo(this.HMboolean.get(varName).getTipo());
+    }
+
+    if(linha.length > 3) {
+      valorNumerico = linha[3].replace(".", "").length();
+    }
+    else {
+      valorString = linha[2].replace(".", "");
+    }
+
+    // Math Operations
+    switch(operation) {
+      // Ascend is supported only for INT and DOUBLE type
+      case "ascend":
+        switch(variavelGenerica.getTipo()) {
+          case "int":
+            this.HMint.get(varName).Increase(valorNumerico);
+            break;
+          case "Double":
+            this.HMdouble.get(varName).Increase(valorNumerico);
+            break;
+          default:
+            System.out.println(variavelGenerica.getTipo() + " does not support 'Ascend' operation");
+            break;
+        } break;
+
+      // Descend is supported only for INT and DOUBLE type
+      case "descend":
+        switch(variavelGenerica.getTipo()) {
+          case "int":
+            this.HMint.get(varName).Decrease(valorNumerico);
+            break;
+          case "Double":
+            this.HMdouble.get(varName).Decrease(valorNumerico);
+            break;
+          default:
+            System.out.println(variavelGenerica.getTipo() + " does not support 'Descend' operation");
+            break;
+        }
+        break;
+
+      // Strengthen is supported only for INT and DOUBLE type
+      case "strengthen":
+        switch(variavelGenerica.getTipo()) {
+          case "int":
+            this.HMint.get(varName).Multiply(valorNumerico);
+            break;
+          case "Double":
+            this.HMdouble.get(varName).Multiply(valorNumerico);
+            break;
+          default:
+            System.out.println(variavelGenerica.getTipo() + " does not support 'Strengthen' operation");
+            break;
+        }
+        break;
+
+      // Weaken is supported only for INT and DOUBLE type
+      case "weaken":
+        if(valorNumerico == 0) {
+          System.out.println("Division by Zero Error caught: line: " + linhaIndex);
+          return;
+        }
+        switch(variavelGenerica.getTipo()) {
+          case "int":
+            this.HMint.get(varName).Divide(valorNumerico);
+            break;
+          case "Double":
+            this.HMdouble.get(varName).Divide(valorNumerico);
+            break;
+          default:
+            System.out.println(variavelGenerica.getTipo() + " does not support 'Weaken' operation");
+            break;
+        }
+        break;
+
+      // Matches supports all variable types
+      case "matches":
+        switch(variavelGenerica.getTipo()) {
+          case "int":
+            Boolean asd = this.HMint.get(varName).Compare(valorString.length());
+            System.out.println(asd);
+            break;
+
+          case "Double":
+            Boolean asd1 = this.HMdouble.get(varName).Compare(valorString.length());
+            System.out.println(asd1);
+            break;
+
+          case "String":
+            Boolean asd2 = this.HMstring.get(varName).Compare(valorString);
+            System.out.println(asd2);
+            break;
+
+          case "Booleano":
+            Boolean asd3 = this.HMboolean.get(varName).Compare(valorString);
+            System.out.println(asd3);
+            break;
+
+          default:
+            System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+            break;
+          }
+          break;
+
+      default:
+        System.out.println("Error at line: " + linhaIndex + " Unknown Expression: " + linha);
+        break;
+    }
+  }
+
+  public void variableMethods(String[] linha, int linhaIndex) {
+    linhaIndex += 1;
+    String method = linha[0];
+    String tipo, varName;
+
+    switch(method) {
+      case "summon":
+        tipo = linha[1];
+        varName = linha[2].replace(".", "");
+
+        switch (tipo) {
+          case "int":
+            TipoInteiro intVar = new TipoInteiro();
+            intVar.setNome(varName);
+            this.HMint.put(varName, intVar);
+            break;
+
+          case "double":
+            TipoDouble doubleVar = new TipoDouble();
+            doubleVar.setNome(varName);
+            this.HMdouble.put(varName, doubleVar);
+            break;
+
+          case "string":
+            TipoString stringVar = new TipoString();
+            stringVar.setNome(varName);
+            this.HMstring.put(varName, stringVar);
+            break;
+
+          case "boolean":
+            TipoBooleano booleanVar = new TipoBooleano();
+            booleanVar.setNome(varName);
+            this.HMboolean.put(varName, booleanVar);
+            break;
+        }
+        break;
+
+      // Variable Inicialization
+      case "cast":
+        varName = linha[1];
+        String valorString = linha[3].replace(".", "");
+        int valorNumerico = linha[3].replace(".", "").length();
+
+        if (this.HMint.containsKey(varName)) {
+          this.HMint.get(varName).setValor(valorNumerico);
+        }
+        else if (this.HMdouble.containsKey(varName)) {
+          this.HMdouble.get(varName).setValor(valorNumerico);
+        }
+        else if (this.HMstring.containsKey(varName)) {
+          this.HMstring.get(varName).setValor(valorString);
+        }
+        else if (this.HMboolean.containsKey(varName)) {
+          this.HMboolean.get(varName).setValor(valorString);
+        }
+        break;
+
+      // Print Variable Value
+      case "reveal":
+        varName = linha[1].replace(".", "");
+
+        if (this.HMint.containsKey(varName)) {
+          System.out.println(this.HMint.get(varName).getValor());
+        }
+        else if (this.HMdouble.containsKey(varName)) {
+          System.out.println(this.HMdouble.get(varName).getValor());
+        }
+        else if (this.HMstring.containsKey(varName)) {
+          System.out.println(this.HMstring.get(varName).getValor());
+        }
+        else if (this.HMboolean.containsKey(varName)) {
+          System.out.println(this.HMboolean.get(varName).getValor());
+        }
+        else {
+          System.out.println("Unexpected '" + varName + "' | Line: " + linhaIndex);
+        }
+        break;
+
+      default:
+        System.out.println("Error at line: " + linhaIndex + " | " + linha);
+        break;
+    }
+  }
 
   public void show() {
-    for(int i = 0; i < this.conteudoAnalisado.size(); i++) {
-      String linha = this.conteudoAnalisado.get(i);
+    int tamanho = this.conteudoAnalisado.size();
+    // System.out.println("Qtd linhas: " + tamanho);
+
+    for(int linhaNumero = 0; linhaNumero < tamanho; linhaNumero++) {
+      String linha = this.conteudoAnalisado.get(linhaNumero);
       String[] linhaSplit = linha.split(" ");
       String nome;
 
-      if(linha.startsWith("//") || linha.endsWith(".") == false || linha.length() < 1) {
-        continue;
-      }
-
-      // Math Operations
+      if(verificaContinuidadeLinha(linha)) continue;
       if(startWithUpperCase(linhaSplit[0])) {
-        // value which will be used to modify the original variable value
-        int valor = 0;
-        String valor1 = "";
-
-        if(linhaSplit.length > 3) {
-          valor = linhaSplit[3].replace(".", "").length();
-        }
-        else {
-          valor1 = linhaSplit[2].replace(".", "");
-        }
-
-        Variavel A = new Variavel();
-
-        if (this.vInt.containsKey(linhaSplit[0])) {
-          A.setTipo(this.vInt.get(linhaSplit[0]).getTipo());
-        }
-        else if (this.vDouble.containsKey(linhaSplit[0])) {
-          A.setTipo(this.vDouble.get(linhaSplit[0]).getTipo());
-        }
-        else if (this.vString.containsKey(linhaSplit[0])) {
-          A.setTipo(this.vString.get(linhaSplit[0]).getTipo());
-        }
-        else if (this.vBoolean.containsKey(linhaSplit[0])) {
-          A.setTipo(this.vBoolean.get(linhaSplit[0]).getTipo());
-        }
-
-        // Math Operations
-        switch(linhaSplit[1]) {
-          // increase
-          case "ascend":
-            switch(A.getTipo()) {
-              case "int":
-                this.vInt.get(linhaSplit[0]).Increase(valor);
-                break;
-              case "Double":
-                this.vDouble.get(linhaSplit[0]).Increase(valor);
-                break;
-              default:
-                System.out.println(A.getTipo() + " does not support 'Ascend' operation");
-                break;
-            }
-            break;
-
-          // decrease
-          case "descend":
-            switch(A.getTipo()) {
-              case "int":
-                this.vInt.get(linhaSplit[0]).Decrease(valor);
-                break;
-              case "Double":
-                this.vDouble.get(linhaSplit[0]).Decrease(valor);
-                break;
-              default:
-                System.out.println(A.getTipo() + " does not support 'Descend' operation");
-                break;
-            }
-            break;
-
-          // multiplication
-          case "strengthen":
-            switch(A.getTipo()) {
-              case "int":
-                this.vInt.get(linhaSplit[0]).Multiply(valor);
-                break;
-              case "Double":
-                this.vDouble.get(linhaSplit[0]).Multiply(valor);
-                break;
-              default:
-                System.out.println(A.getTipo() + " does not support 'Strengthen' operation");
-                break;
-            }
-            break;
-
-          // division
-          case "weaken":
-            if(valor == 0) {
-              System.out.println("Division by Zero caught: line: " + (i+1));
-              return;
-            }
-            switch(A.getTipo()) {
-              case "int":
-                this.vInt.get(linhaSplit[0]).Divide(valor);
-                break;
-              case "Double":
-                this.vDouble.get(linhaSplit[0]).Divide(valor);
-                break;
-              default:
-                System.out.println(A.getTipo() + " does not support 'Weaken' operation");
-                break;
-            }
-            break;
-
-          // comparision
-          case "matches":
-            switch(A.getTipo()) {
-              case "int":
-                Boolean asd = this.vInt.get(linhaSplit[0]).Compare(valor1.length());
-                System.out.println(asd);
-                break;
-
-              case "Double":
-                Boolean asd1 = this.vDouble.get(linhaSplit[0]).Compare(valor1.length());
-                System.out.println(asd1);
-                break;
-
-              case "String":
-                Boolean asd2 = this.vString.get(linhaSplit[0]).Compare(valor1);
-                System.out.println(asd2);
-                break;
-
-              case "Booleano":
-                Boolean asd3 = this.vBoolean.get(linhaSplit[0]).Compare(valor1);
-                System.out.println(asd3);
-                break;
-
-              default:
-                break;
-              }
-              break;
-
-          default:
-            System.out.println("Error at line: " + (i+1) + " Unknown Expression: " + linha);
-            break;
-        }
+        mathOperations(linhaSplit, linhaNumero);
         continue;
       }
 
       // Variable Declaration, Inicialization and Reveal
-      switch(linhaSplit[0]) {
-        // Variable Declaration
-      	case "summon":
-          switch (linhaSplit[1]) {
-            case "int":
-              TipoInteiro intVar = new TipoInteiro();
-              nome = linhaSplit[2].replace(".", "");
-              intVar.setNome(nome);
-              this.vInt.put(nome, intVar);
-              break;
-
-            case "double":
-              TipoDouble doubleVar = new TipoDouble();
-              nome = linhaSplit[2].replace(".", "");
-              doubleVar.setNome(nome);
-              this.vDouble.put(nome, doubleVar);
-              break;
-
-            case "string":
-              TipoString stringVar = new TipoString();
-              nome = linhaSplit[2].replace(".", "");
-              stringVar.setNome(nome);
-              this.vString.put(nome, stringVar);
-              break;
-
-            case "boolean":
-              TipoBooleano booleanVar = new TipoBooleano();
-              nome = linhaSplit[2].replace(".", "");
-              booleanVar.setNome(nome);
-              this.vBoolean.put(nome, booleanVar);
-              break;
-          }
-      	  break;
-
-        // Variable Inicialization
-        case "cast":
-          if (this.vInt.containsKey(linhaSplit[1])) {
-            int valor = linhaSplit[3].replace(".", "").length();
-            this.vInt.get(linhaSplit[1]).setValor(valor);
-          }
-
-          else if (this.vDouble.containsKey(linhaSplit[1])) {
-            int valor = linhaSplit[3].replace(".", "").length();
-            this.vDouble.get(linhaSplit[1]).setValor(valor);
-          }
-
-          else if (this.vString.containsKey(linhaSplit[1])) {
-            String valor = linhaSplit[3].replace(".", "");
-            this.vString.get(linhaSplit[1]).setValor(valor);
-          }
-
-          else if (this.vBoolean.containsKey(linhaSplit[1])) {
-            String valor = linhaSplit[3].replace(".", "");
-            this.vBoolean.get(linhaSplit[1]).setValor(valor);
-          }
-          break;
-
-        // Print Variable Value
-        case "reveal":
-          String var = linhaSplit[1].replace(".", "");
-          if (this.vInt.containsKey(var)) {
-            int valor = this.vInt.get(var).getValor();
-            System.out.println(valor);
-          }
-          else if (this.vDouble.containsKey(var)) {
-            double valor = this.vDouble.get(var).getValor();
-            System.out.println(valor);
-          }
-          else if (this.vString.containsKey(var)) {
-            String valor = this.vString.get(var).getValor();
-            System.out.println(valor);
-          }
-          else if (this.vBoolean.containsKey(var)) {
-            Boolean valor = this.vBoolean.get(var).getValor();
-            System.out.println(valor);
-          }
-          else {
-            System.out.println("Unexpected '" + var + "' | Line: " + (i+1));
-          }
-          break;
-
-        default:
-          System.out.println("Error at line: " + (i+1) + " | " + linha);
-          break;
-      }
+      variableMethods(linhaSplit, linhaNumero);
     }
   }
 }
