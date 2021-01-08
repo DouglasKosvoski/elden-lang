@@ -5,12 +5,24 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.io.File;
 
+/* importa os tipos primitivos de variaveis */
 import fonte.elden.vars.*;
+/* importa o dicionario com a chave-valor */
+import fonte.elden.main.KeyMap;
 
 public class Leitor {
+  /*  String com o nome do arquivo passado */
   private String filename;
+  /* conteudo bruto do arquivo passado */
   private Scanner conteudo;
+
+  /* dicionario com as chaves-valores */
+  KeyMap KMdict = new KeyMap();
+
+  /* ArrayList com o conteudo de Strings, analisado a partir do Scanner com o conteudo bruto */
   ArrayList<String> conteudoAnalisado = new ArrayList<String>();
+
+  /* diferentes HashMap's para salvar cada tipo de variavel */
   HashMap<String, TipoInteiro>  HMint     = new HashMap<String, TipoInteiro>();
   HashMap<String, TipoDouble>   HMdouble  = new HashMap<String, TipoDouble>();
   HashMap<String, TipoString>   HMstring  = new HashMap<String, TipoString>();
@@ -21,28 +33,41 @@ public class Leitor {
     this.setNomeDoArquivo(filename);
     this.setConteudo();
     this.analisaScanner();
+    this.setDict(this.KMdict);
   }
 
-  // setters
+  /* modifica a variavel para armazenar o nome do arquivo (String) */
   private void setNomeDoArquivo(String filename) {
     this.filename = filename;
   }
+
+  /* cria ou carrega um arquivo a partir do argumento passado */
   private void setConteudo() {
-    // cria ou faz load de um arquivo a partir do argumento passado
     this.conteudo = new Scanner(this.filename);
   }
 
-  // getters
+  /* inicializa o dicionario contendo as chaves-valor */
+  private void setDict(KeyMap d) {
+    d.createDict();
+  }
+
+  /* retorna uma String com o nome do arquivo passado ao programa */
   public String getNomeDoArquivo() {
     return this.filename;
   }
+
+  /* retorna um Scanner com o conteudo bruto do arquivo passado */
   public Scanner getConteudo() {
     return this.conteudo;
   }
+
+  /* retorna um ArrayList com o conteudo (strings) */
   public ArrayList getConteudoAnalisado() {
     return this.conteudoAnalisado;
   }
 
+  /* analisa a partir do Scanner o seu conteudo e entao salva em uma variavel
+  para entao ser utilizada no decorrer da execucao do programa */
   private void analisaScanner() {
     try {
       Scanner entrada = this.conteudo;
@@ -59,6 +84,8 @@ public class Leitor {
       e.printStackTrace();
     }
   }
+
+  /* retorna True caso o primeiro caracter seja Maiusculo e False caso seja Null ou Minusculo  */
   public Boolean startWithUpperCase(String s) {
     if(null == s || s.isEmpty()){
       return false;
@@ -67,21 +94,30 @@ public class Leitor {
       return (Character.isUpperCase(s.codePointAt(0)));
     }
   }
+
+  /* Retorna False quando a linha esta nos conformes do programa, se nao retorna True */
   public Boolean verificaContinuidadeLinha(String linha) {
-    // Retorna TRUE quando a linha esta nos conformes do programa, se nao retorna False
     return (linha.startsWith("//") || linha.endsWith(".") == false || linha.length() < 1);
   }
 
+  /* responsavel por realizar todas as funcoes matematicas
+  como por exemplo: adicao, subtracao, multiplicacao, divisao e comparacoes */
   public void mathOperations(String[] linha, int linhaIndex) {
+    /* soma 1, uma vez que a linha numero 0 nao existe */
     linhaIndex += 1;
+    /* valor responsavel pelas modificacoes das variaveis de tipos Int e Double */
     int valorNumerico = 0;
+    /* valor responsavel pelas modificacoes das variaveis de tipos String e Boolean */
     String valorString = "";
+    /* extrai o nome da variavel a ser manipulada */
     String varName = linha[0];
+    /* pega a operacao a ser realizada */
     String operation = linha[1];
 
+    /* variavel generica a qual sera atribuida o tipo da variavel em questao*/
     Variavel variavelGenerica = new Variavel();
 
-    // verifica qual HM contem a varivel
+    /* verifica em qual HashMap a varivel esta contida */
     if (this.HMint.containsKey(varName)) {
       variavelGenerica.setTipo(this.HMint.get(varName).getTipo());
     }
@@ -102,9 +138,9 @@ public class Leitor {
       valorString = linha[2].replace(".", "");
     }
 
-    // Math Operations
+    /* switch-case responsavel por identificar a expressao aritmetica */
     switch(operation) {
-      // Ascend is supported only for INT and DOUBLE type
+      /* Ascend (Adicao) eh suportado apenas pelos tipos Inteiros e Doubles */
       case "ascend":
         switch(variavelGenerica.getTipo()) {
           case "int":
@@ -118,7 +154,7 @@ public class Leitor {
             break;
         } break;
 
-      // Descend is supported only for INT and DOUBLE type
+      /* Descend (subtracao) eh suportado apenas pelos tipos Inteiros e Doubles */
       case "descend":
         switch(variavelGenerica.getTipo()) {
           case "int":
@@ -133,7 +169,7 @@ public class Leitor {
         }
         break;
 
-      // Strengthen is supported only for INT and DOUBLE type
+      /* Strengthen (multiplicacao) eh suportado apenas pelos tipos Inteiros e Doubles */
       case "strengthen":
         switch(variavelGenerica.getTipo()) {
           case "int":
@@ -148,8 +184,9 @@ public class Leitor {
         }
         break;
 
-      // Weaken is supported only for INT and DOUBLE type
+      /* Weaken (divisao) eh suportado apenas pelos tipos Inteiros e Doubles */
       case "weaken":
+        /* evita divisao por zero */
         if(valorNumerico == 0) {
           System.out.println("Division by Zero Error caught: line: " + linhaIndex);
           return;
@@ -167,7 +204,7 @@ public class Leitor {
         }
         break;
 
-      // Matches supports all variable types
+      /* Matches (comparacao) eh suportada por todos os tipos primitivos de variaveis */
       case "matches":
         switch(variavelGenerica.getTipo()) {
           case "int":
@@ -196,17 +233,23 @@ public class Leitor {
           }
           break;
 
+      /* se nenhuma expressao foi condizente */
       default:
         System.out.println("Error at line: " + linhaIndex + " Unknown Expression: " + linha);
         break;
     }
   }
 
+  /* metodo responsavel pela identificacao das palavras-chaves
+  para que as variaveis possam ser declaradas, inicializadas
+  e tambem alguns outros metodos estaticos */
   public void variableMethods(String[] linha, int linhaIndex) {
     linhaIndex += 1;
     String method = linha[0];
     String tipo, varName;
 
+    /* responsavel por indentificar qual metodo esta sendo executado
+    seja declaracao, inicializacao ou mesmo print */
     switch(method) {
       case "summon":
         tipo = linha[1];
@@ -286,22 +329,31 @@ public class Leitor {
     }
   }
 
-  public void show() {
+  /* metodo principal responsavel por fazer a chamada de todos os outros
+  metodos em tempo de execucao, como verificacoes, manipulacoes e operacoes*/
+  public void interpreta() {
+    /* quatidade de linhas do arquivo passado ao programa e que sera interpretado */
     int tamanho = this.conteudoAnalisado.size();
-    // System.out.println("Qtd linhas: " + tamanho);
 
+    /* looping que passa por todas as linhas do arquivo passado */
     for(int linhaNumero = 0; linhaNumero < tamanho; linhaNumero++) {
+      /* pega as linhas do ArrayList a partir de um indice passado */
       String linha = this.conteudoAnalisado.get(linhaNumero);
+      /* separa essa linha passada em uma sublista onde o separador em o espaco em branco */
       String[] linhaSplit = linha.split(" ");
-      String nome;
 
+      // verifica se eh ou nao uma linha comentada por '//', se termina em '.'
       if(verificaContinuidadeLinha(linha)) continue;
+
+      /* se a linha comeca com letra maiucula, significa que eh uma variavel
+      entao metodos aritmeticos sao chamados */
       if(startWithUpperCase(linhaSplit[0])) {
         mathOperations(linhaSplit, linhaNumero);
         continue;
       }
 
-      // Variable Declaration, Inicialization and Reveal
+      /* se o programa chegou ate aqui significa que nao estamos trabalhando com
+      uma expressao aritimetica mas sim, algum caso de declaracao, inicializacao de variavel */
       variableMethods(linhaSplit, linhaNumero);
     }
   }

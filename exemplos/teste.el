@@ -1,46 +1,41 @@
-# declaracao de variavel
-summon a
-int a;
+summon int A.
+summon double B.
+summon string C.
+summon boolean D.
 
-# Atribuicao de valor a variavel
-a = 6
-cast a as 6
-cast a as one head falling down the road
+cast A as candy.
+cast B as candy.
+cast C as candy.
+cast D as true.
 
-# matematica
-# equals
-== = matches
-0 = nothingness
+//reveal A.
+//reveal B.
+//reveal C.
+//reveal D.
 
-# sum
-a += 1
-a ascend 1
-a ascend by thyself
+// INTEGER
+//A ascend by wind.
+//A descend by lava.
+//A strengthen by water.
+//A weaken by fire.
+//A matches water.
 
-# subtraction
-a -= 1
-a descend 1
-a descend by death
+// DOUBLE
+//B ascend by wind.
+//B descend by lava.
+//B strengthen by water.
+//B weaken by fire.
+//B matches water.
 
-# multiply
-a *= 7
-a strengthen 7
-a strengthen by the numbers of sinners in the room
+// STRING
+//C matches water.
+//C matches candy.
 
-# division
-a /= 4
-a weaken 4
-a weaken by the forces of god
+// BOOLEAN
+//D matches false.
+//D matches true.
 
-# modulo
-a % 3
-a residual 3
-a residual from fire and ice
-
-# while
-while (a % 2 == 0)
-epoch a residual toxic waste matches nothingness begin
-    begin
-        asdasd
-    end
-end
+//reveal A.
+//reveal B.
+//reveal C.
+//reveal D.
