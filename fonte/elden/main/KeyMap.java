@@ -35,6 +35,7 @@ public class KeyMap {
     this.HMkeymap.put("declaration",    "summon");
     this.HMkeymap.put("inicialization", "cast");
     this.HMkeymap.put("print",          "reveal");
+    this.HMkeymap.put("input",          "input");
   }
 
   /* retorna uma String a partir da chave passada*/

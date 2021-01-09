@@ -26,6 +26,7 @@ cast D as true.
 //A is unlike water.
 //A residual water.
 //A is powered by water.
+//input A.
 
 // DOUBLE
 //B ascend by wind.
@@ -40,16 +41,19 @@ cast D as true.
 //B is unlike water.
 //B residual water.
 //B is powered by water.
+//input B.
 
 // STRING
 //C matches water.
 //C matches candy.
 //C is unlike water.
+//input C.
 
 // BOOLEAN
 //D matches false.
 //D matches true.
 //D is unlike water.
+//input D.
 
 //reveal A.
 //reveal B.

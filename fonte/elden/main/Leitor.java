@@ -399,6 +399,28 @@ public class Leitor {
         System.out.println("Unexpected '" + varName + "' | Line: " + linhaIndex);
       }
     }
+    // Recebe um imput do teclado
+    else if (method.equals("input")) {
+      varName = linha[1].replace(".", "");
+      Scanner keyboard = new Scanner(System.in);
+      String asd = keyboard.nextLine();
+
+      if (this.HMint.containsKey(varName)) {
+        this.HMint.get(varName).setValor(asd);
+      }
+      else if (this.HMdouble.containsKey(varName)) {
+        this.HMdouble.get(varName).setValor(asd);
+      }
+      else if (this.HMstring.containsKey(varName)) {
+        this.HMstring.get(varName).setValor(asd);
+      }
+      else if (this.HMboolean.containsKey(varName)) {
+        this.HMboolean.get(varName).setValor(asd);
+      }
+      else {
+        System.out.println("Unexpected '" + varName + "' | Line: " + linhaIndex);
+      }
+    }
     else {
       System.out.println("Error at line: " + linhaIndex + " | " + linha);
     }
