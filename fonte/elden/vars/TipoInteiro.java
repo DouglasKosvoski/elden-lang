@@ -1,5 +1,7 @@
 package fonte.elden.vars;
 
+import java.lang.Math;
+
 public class TipoInteiro extends Variavel {
 	private int valor;
 
@@ -50,8 +52,26 @@ public class TipoInteiro extends Variavel {
   public Boolean Compare(int a) {
     return (this.valor == a);
   }
-  public Boolean Compare(double a) {
-    return (this.valor == a);
-  }
 
+  public Boolean biggerThan(int a) {
+    return (this.valor > a);
+  }
+  public Boolean biggerOrEqualThan(int a) {
+    return (this.valor >= a);
+  }
+  public Boolean lessThan(int a) {
+    return (this.valor < a);
+  }
+  public Boolean lessOrEqualThan(int a) {
+    return (this.valor <= a);
+  }
+  public Boolean diff(int a) {
+    return (this.valor != a);
+  }
+  public int mod(int a) {
+    return (this.valor % a);
+  }
+  public int power(int a) {
+    return ((int) Math.pow(this.valor, a));
+  }
 }

@@ -138,6 +138,16 @@ public class Leitor {
       valorString = linha[2].replace(".", "");
     }
 
+    if(linha[2].equals("unlike")) {
+      operation = linha[2];
+      valorNumerico = linha[3].replace(".", "").length();
+      valorString = linha[3].replace(".", "");
+    }
+    else if(operation.equals("is")) {
+      operation = linha[2];
+      valorNumerico = linha[4].replace(".", "").length();
+    }
+
     if (operation.equals(KMdict.getValue("addition"))) {
       if (variavelGenerica.getTipo().equals("int")) {
         this.HMint.get(varName).Increase(valorNumerico);
@@ -204,6 +214,107 @@ public class Leitor {
       else if (variavelGenerica.getTipo().equals("Booleano")) {
         Boolean asd3 = this.HMboolean.get(varName).Compare(valorString);
         System.out.println(asd3);
+      }
+      else {
+        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+      }
+    }
+    else if (operation.equals(KMdict.getValue("greaterThan"))) {
+      if (variavelGenerica.getTipo().equals("int")) {
+        Boolean asd = this.HMint.get(varName).biggerThan(valorNumerico);
+        System.out.println(asd);
+      }
+      else if (variavelGenerica.getTipo().equals("Double")) {
+        Boolean asd1 = this.HMdouble.get(varName).biggerThan(valorNumerico);
+        System.out.println(asd1);
+      }
+      else {
+        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+      }
+    }
+    else if (operation.equals(KMdict.getValue("greaterOrEquals"))) {
+      if (variavelGenerica.getTipo().equals("int")) {
+        Boolean asd = this.HMint.get(varName).biggerOrEqualThan(valorNumerico);
+        System.out.println(asd);
+      }
+      else if (variavelGenerica.getTipo().equals("Double")) {
+        Boolean asd1 = this.HMdouble.get(varName).biggerOrEqualThan(valorNumerico);
+        System.out.println(asd1);
+      }
+      else {
+        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+      }
+    }
+    else if (operation.equals(KMdict.getValue("smallerThan"))) {
+      if (variavelGenerica.getTipo().equals("int")) {
+        Boolean asd = this.HMint.get(varName).lessThan(valorNumerico);
+        System.out.println(asd);
+      }
+      else if (variavelGenerica.getTipo().equals("Double")) {
+        Boolean asd1 = this.HMdouble.get(varName).lessThan(valorNumerico);
+        System.out.println(asd1);
+      }
+      else {
+        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+      }
+    }
+    else if (operation.equals(KMdict.getValue("smallerOrEquals"))) {
+      if (variavelGenerica.getTipo().equals("int")) {
+        Boolean asd = this.HMint.get(varName).lessOrEqualThan(valorNumerico);
+        System.out.println(asd);
+      }
+      else if (variavelGenerica.getTipo().equals("Double")) {
+        Boolean asd1 = this.HMdouble.get(varName).lessOrEqualThan(valorNumerico);
+        System.out.println(asd1);
+      }
+      else {
+        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+      }
+    }
+    else if (operation.equals(KMdict.getValue("different"))) {
+      if (variavelGenerica.getTipo().equals("int")) {
+        Boolean asd = this.HMint.get(varName).diff(valorNumerico);
+        System.out.println(asd);
+      }
+      else if (variavelGenerica.getTipo().equals("Double")) {
+        Boolean asd1 = this.HMdouble.get(varName).diff(valorNumerico);
+        System.out.println(asd1);
+      }
+      else if (variavelGenerica.getTipo().equals("String")) {
+        Boolean asd1 = this.HMstring.get(varName).diff(valorString);
+        System.out.println(asd1);
+      }
+      else if (variavelGenerica.getTipo().equals("Booleano")) {
+        Boolean asd1 = this.HMboolean.get(varName).diff(valorString);
+        System.out.println(asd1);
+      }
+      else {
+        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+      }
+    }
+    else if (operation.equals(KMdict.getValue("modulo"))) {
+      valorNumerico = linha[2].replace(".", "").length();
+
+      if (variavelGenerica.getTipo().equals("int")) {
+        int asd = this.HMint.get(varName).mod(valorNumerico);
+        System.out.println(asd);
+      }
+      else if (variavelGenerica.getTipo().equals("Double")) {
+        double asd1 = this.HMdouble.get(varName).mod(valorNumerico);
+        System.out.println(asd1);
+      }
+      else {
+        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+      }
+    }
+    else if (operation.equals(KMdict.getValue("power"))) {
+      if (variavelGenerica.getTipo().equals("int")) {
+        int asd = this.HMint.get(varName).power(valorNumerico);
+        System.out.println(asd);
+      }
+      else if (variavelGenerica.getTipo().equals("Double")) {
+        double asd1 = this.HMdouble.get(varName).power(valorNumerico);
+        System.out.println(asd1);
       }
       else {
         System.out.println("Malformed Expression. Line: " + (linhaIndex+1));

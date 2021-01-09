@@ -1,5 +1,7 @@
 package fonte.elden.vars;
 
+import java.lang.Math;
+
 public class TipoDouble extends Variavel {
 	private double valor;
 
@@ -57,4 +59,25 @@ public class TipoDouble extends Variavel {
     return (this.valor == a);
   }
 
+  public Boolean biggerThan(double a) {
+    return (this.valor > a);
+  }
+  public Boolean biggerOrEqualThan(double a) {
+    return (this.valor >= a);
+  }
+  public Boolean lessThan(double a) {
+    return (this.valor < a);
+  }
+  public Boolean lessOrEqualThan(double a) {
+    return (this.valor <= a);
+  }
+  public Boolean diff(double a) {
+    return (this.valor != a);
+  }
+  public double mod(double a) {
+    return (this.valor % a);
+  }
+  public double power(double a) {
+    return ((double) Math.pow(this.valor, a));
+  }
 }

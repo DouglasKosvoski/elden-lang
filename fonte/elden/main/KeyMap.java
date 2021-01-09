@@ -21,6 +21,16 @@ public class KeyMap {
     this.HMkeymap.put("division",       "weaken");
     this.HMkeymap.put("comparision",    "matches");
 
+    this.HMkeymap.put("greaterThan",    "stronger");
+    this.HMkeymap.put("greaterOrEquals","stronger_or_equivalent");
+
+    this.HMkeymap.put("smallerThan",    "weaker");
+    this.HMkeymap.put("smallerOrEquals","weaker_or_equivalent");
+
+    this.HMkeymap.put("different",      "unlike");
+    this.HMkeymap.put("modulo",         "residual");
+    this.HMkeymap.put("power",          "powered");
+
     /* static methods */
     this.HMkeymap.put("declaration",    "summon");
     this.HMkeymap.put("inicialization", "cast");

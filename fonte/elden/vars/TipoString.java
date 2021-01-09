@@ -30,4 +30,7 @@ public class TipoString extends Variavel {
   public Boolean Compare(String s) {
     return (this.valor.equals(s));
   }
+  public Boolean diff(String s) {
+    return (!this.valor.equals(s));
+  }
 }

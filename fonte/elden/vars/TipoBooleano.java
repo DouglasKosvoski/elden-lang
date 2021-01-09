@@ -29,4 +29,7 @@ public class TipoBooleano extends Variavel {
   public Boolean Compare(String s) {
     return (this.valorLogico == Boolean.parseBoolean(s));
   }
+  public Boolean diff(String s) {
+    return !(this.valorLogico == Boolean.parseBoolean(s));
+  }
 }
