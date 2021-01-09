@@ -52,15 +52,15 @@ cast E as false.
 //C matches water.
 //C matches candy.
 //C is unlike water.
-//input C.
 //C obtain B.
+//input C.
 
 // BOOLEAN
 //D matches false.
 //D matches true.
 //D is unlike water.
-//input D.
 //D obtain E.
+//input D.
 
 //reveal A.
 //reveal B.

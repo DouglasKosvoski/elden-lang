@@ -21,7 +21,7 @@ public class Main {
   as funcoes declaradas do arquivo passado */
   private static void Executa(String filename) {
     Leitor leitor = new Leitor(filename);
-	  leitor.interpreta();
+	  leitor.roda();
   }
 
   /* verifica se algum argumento foi passado ao programa */
