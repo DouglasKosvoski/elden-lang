@@ -31,6 +31,9 @@ public class TipoInteiro extends Variavel {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
+	public void setValor(double valor) {
+		this.valor = (int) valor;
+	}
 
 	// Getters
   public int getValor() {

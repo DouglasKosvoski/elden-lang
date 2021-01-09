@@ -111,11 +111,13 @@ public class Leitor {
     String valorString = "";
     /* extrai o nome da variavel a ser manipulada */
     String varName = linha[0];
+
     /* pega a operacao a ser realizada */
     String operation = linha[1];
 
     /* variavel generica a qual sera atribuida o tipo da variavel em questao*/
     Variavel variavelGenerica = new Variavel();
+    Variavel variavelGenerica2 = new Variavel();
 
     /* verifica em qual HashMap a varivel esta contida */
     if (this.HMint.containsKey(varName)) {
@@ -315,6 +317,61 @@ public class Leitor {
       else if (variavelGenerica.getTipo().equals("Double")) {
         double asd1 = this.HMdouble.get(varName).power(valorNumerico);
         System.out.println(asd1);
+      }
+      else {
+        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
+      }
+    }
+    else if (operation.equals(KMdict.getValue("receives"))) {
+      String varName2 = linha[2].replace(".", "");
+      /* verifica em qual HashMap a varivel esta contida */
+      if (this.HMint.containsKey(varName2)) {
+        variavelGenerica2.setTipo(this.HMint.get(varName2).getTipo());
+      }
+      else if (this.HMdouble.containsKey(varName2)) {
+        variavelGenerica2.setTipo(this.HMdouble.get(varName2).getTipo());
+      }
+      else if (this.HMstring.containsKey(varName2)) {
+        variavelGenerica2.setTipo(this.HMstring.get(varName2).getTipo());
+      }
+      else if (this.HMboolean.containsKey(varName2)) {
+        variavelGenerica2.setTipo(this.HMboolean.get(varName2).getTipo());
+      }
+
+      if (variavelGenerica.getTipo().equals("int")) {
+        if (variavelGenerica2.getTipo().equals("int")) {
+          this.HMint.get(varName).setValor(this.HMint.get(varName2).getValor());
+        }
+        else if (variavelGenerica2.getTipo().equals("Double")) {
+          this.HMint.get(varName).setValor(this.HMdouble.get(varName2).getValor());
+        }
+      }
+      else if (variavelGenerica.getTipo().equals("Double")) {
+        if (variavelGenerica2.getTipo().equals("int")) {
+          this.HMdouble.get(varName).setValor(this.HMint.get(varName2).getValor());
+        }
+        else if (variavelGenerica2.getTipo().equals("Double")) {
+          this.HMdouble.get(varName).setValor(this.HMdouble.get(varName2).getValor());
+        }
+      }
+      else if (variavelGenerica.getTipo().equals("String")) {
+        if (variavelGenerica2.getTipo().equals("int")) {
+          this.HMstring.get(varName).setValor(String.valueOf(this.HMint.get(varName2).getValor()));
+        }
+        else if (variavelGenerica2.getTipo().equals("Double")) {
+          this.HMstring.get(varName).setValor(String.valueOf(this.HMdouble.get(varName2).getValor()));
+        }
+        else if (variavelGenerica2.getTipo().equals("String")) {
+          this.HMstring.get(varName).setValor(String.valueOf(this.HMstring.get(varName2).getValor()));
+        }
+        else if (variavelGenerica2.getTipo().equals("Booleano")) {
+          this.HMstring.get(varName).setValor(String.valueOf(this.HMboolean.get(varName2).getValor()));
+        }
+      }
+      else if (variavelGenerica.getTipo().equals("Booleano")) {
+        if (variavelGenerica2.getTipo().equals("Booleano")) {
+          this.HMboolean.get(varName).setValor(this.HMboolean.get(varName2).getValor());
+        }
       }
       else {
         System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
