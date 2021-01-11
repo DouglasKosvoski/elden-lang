@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 
 compila() {
-	javac ./fonte/elden/main/*.java
+	javac ./fonte/elden/main/*.java &&
+  printf "compilado com Sucesso!\n"
+}
+
+criaJar() {
+  jar -cmvf manifest.txt elden.jar fonte/elden/main/*.class fonte/elden/vars/*.class > /dev/null &&
+  printf "*.jar Criado com Sucesso!\n"
 }
 
 roda() {
-	java fonte.elden.main.Main $1
+  printf "\nRodando!\n\n"
+	java -jar elden.jar $1
 }
 
 compila
+criaJar
 roda $1

@@ -2,8 +2,8 @@ package fonte.elden.main;
 
 /* importa os tipos primitivos de variaveis */
 import fonte.elden.vars.*;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Estatico {
 
@@ -49,8 +49,16 @@ public class Estatico {
     // Variable Inicialization
     else if (method.equals(KMdict.getValue("inicialization"))) {
       varName = linha[1];
-      String valorString = linha[3].replace(".", "");
-      int valorNumerico = linha[3].replace(".", "").length();
+
+      String[] valorStringLista = Arrays.copyOfRange(linha, 3, linha.length);
+      String valorString = "";
+
+      for (int i=0; i<valorStringLista.length; i++) {
+        valorString += valorStringLista[i] + " ";
+      }
+
+      valorString = valorString.replace(".", "");
+      int valorNumerico = valorString.replace(".", "").replace(" ", "").length();
 
       if (HMint.containsKey(varName)) {
         HMint.get(varName).setValor(valorNumerico);
