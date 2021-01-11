@@ -2,13 +2,13 @@ package fonte.elden.main;
 
 /* importa os tipos primitivos de variaveis */
 import fonte.elden.vars.*;
-import java.util.HashMap;
+import java.util.*;
 
 public class Aritmetico {
 
   /* responsavel por realizar todas as funcoes matematicas
   como por exemplo: adicao, subtracao, multiplicacao, divisao e comparacoes */
-  public void mathOperations(KeyMap KMdict, HashMap<String, TipoInteiro> HMint,
+  public String mathOperations(KeyMap KMdict, HashMap<String, TipoInteiro> HMint,
     HashMap<String, TipoDouble> HMdouble, HashMap<String, TipoString> HMstring,
     HashMap<String, TipoBooleano> HMboolean, String[] linha, int linhaIndex) {
 
@@ -96,7 +96,7 @@ public class Aritmetico {
       /* evita divisao por zero */
       if(valorNumerico == 0) {
         System.out.println("Division by Zero Error caught: line: " + linhaIndex);
-        return;
+        return "";
       }
 
       if (variavelGenerica.getTipo().equals("int")) {
@@ -110,26 +110,69 @@ public class Aritmetico {
       }
     }
     else if (operation.equals(KMdict.getValue("comparision"))) {
+      Boolean resultdadoComparacao = false;
+      String varName2 = linha[2].replace(".", "");
+
+      /* verifica em qual HashMap a varivel esta contida */
+      if (HMint.containsKey(varName2)) {
+        variavelGenerica2.setTipo(HMint.get(varName2).getTipo());
+      }
+      else if (HMdouble.containsKey(varName2)) {
+        variavelGenerica2.setTipo(HMdouble.get(varName2).getTipo());
+      }
+      else if (HMstring.containsKey(varName2)) {
+        variavelGenerica2.setTipo(HMstring.get(varName2).getTipo());
+      }
+      else if (HMboolean.containsKey(varName2)) {
+        variavelGenerica2.setTipo(HMboolean.get(varName2).getTipo());
+      }
+
       if (variavelGenerica.getTipo().equals("int")) {
-        Boolean asd = HMint.get(varName).Compare(valorString.length());
-        System.out.println(asd);
+        if (variavelGenerica2.getTipo().equals("int")) {
+          resultdadoComparacao = HMint.get(varName).Compare(HMint.get(varName2).getValor());
+        }
+        else if (variavelGenerica2.getTipo().equals("Double")) {
+          resultdadoComparacao = HMint.get(varName).Compare((int) HMdouble.get(varName2).getValor());
+        }
+        else {
+          resultdadoComparacao = HMint.get(varName).Compare(varName2.length());
+        }
       }
       else if (variavelGenerica.getTipo().equals("Double")) {
-        Boolean asd1 = HMdouble.get(varName).Compare(valorString.length());
-        System.out.println(asd1);
+        if (variavelGenerica2.getTipo().equals("int")) {
+          resultdadoComparacao = HMdouble.get(varName).Compare(HMint.get(varName2).getValor());
+        }
+        else if (variavelGenerica2.getTipo().equals("Double")) {
+          resultdadoComparacao = HMdouble.get(varName).Compare(HMdouble.get(varName2).getValor());
+        }
       }
       else if (variavelGenerica.getTipo().equals("String")) {
-        Boolean asd2 = HMstring.get(varName).Compare(valorString);
-        System.out.println(asd2);
+        if (variavelGenerica2.getTipo().equals("int")) {
+          resultdadoComparacao = HMstring.get(varName).Compare(String.valueOf(HMint.get(varName2).getValor()));
+        }
+        else if (variavelGenerica2.getTipo().equals("Double")) {
+          resultdadoComparacao = HMstring.get(varName).Compare(String.valueOf(HMdouble.get(varName2).getValor()));
+        }
+        else if (variavelGenerica2.getTipo().equals("String")) {
+          resultdadoComparacao = HMstring.get(varName).Compare(String.valueOf(HMstring.get(varName2).getValor()));
+        }
+        else if (variavelGenerica2.getTipo().equals("Booleano")) {
+          resultdadoComparacao = HMstring.get(varName).Compare(String.valueOf(HMboolean.get(varName2).getValor()));
+        }
       }
       else if (variavelGenerica.getTipo().equals("Booleano")) {
-        Boolean asd3 = HMboolean.get(varName).Compare(valorString);
-        System.out.println(asd3);
+        if (variavelGenerica2.getTipo().equals("String")) {
+          resultdadoComparacao = HMstring.get(varName).Compare(String.valueOf(HMstring.get(varName2).getValor()));
+        }
+        else if (variavelGenerica2.getTipo().equals("Booleano")) {
+          resultdadoComparacao = HMstring.get(varName).Compare(String.valueOf(HMboolean.get(varName2).getValor()));
+        }
       }
-      else {
-        System.out.println("Malformed Expression. Line: " + (linhaIndex+1));
-      }
+
+      // System.out.println(String.valueOf(resultdadoComparacao));
+      return String.valueOf(resultdadoComparacao);
     }
+
     else if (operation.equals(KMdict.getValue("greaterThan"))) {
       if (variavelGenerica.getTipo().equals("int")) {
         Boolean asd = HMint.get(varName).biggerThan(valorNumerico);
@@ -289,5 +332,7 @@ public class Aritmetico {
     else {
       System.out.println("Error at line: " + linhaIndex + " Unknown Expression: " + linha);
     }
+
+    return "";
   }
 }

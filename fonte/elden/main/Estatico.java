@@ -10,7 +10,7 @@ public class Estatico {
   /* metodo responsavel pela identificacao das palavras-chaves
   para que as variaveis possam ser declaradas, inicializadas
   e tambem alguns outros metodos estaticos */
-  public void variableMethods(KeyMap KMdict, HashMap<String, TipoInteiro> HMint,
+  public String variableMethods(KeyMap KMdict, HashMap<String, TipoInteiro> HMint,
     HashMap<String, TipoDouble> HMdouble, HashMap<String, TipoString> HMstring,
     HashMap<String, TipoBooleano> HMboolean, String[] linha, int linhaIndex) {
 
@@ -93,6 +93,7 @@ public class Estatico {
       else {
         System.out.println("Unexpected '" + varName + "' | Line: " + linhaIndex);
       }
+      return "";
     }
     // Recebe um imput do teclado
 
@@ -116,10 +117,21 @@ public class Estatico {
       else {
         System.out.println("Unexpected '" + varName + "' | Line: " + linhaIndex);
       }
+      return "";
+    }
+
+    else if (method.equals("if")) {
+      String retornoDaFuncao = "";
+      for (int i=1; i<linha.length; i++) {
+        retornoDaFuncao += linha[i] + " ";
+      }
+      return retornoDaFuncao;
     }
 
     else {
       System.out.println("Error at line: " + linhaIndex + " | " + linha);
+      return "";
     }
+    return "";
   }
 }

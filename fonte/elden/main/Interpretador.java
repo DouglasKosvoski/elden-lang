@@ -65,14 +65,25 @@ public class Interpretador {
 
       /* se a linha comeca com letra maiuscula, significa que eh uma variavel
       entao metodos aritmeticos serao chamados */
+      String retornoA = "";
+      String retornoV = "";
+
       if(startWithUpperCase(linhaSplit[0])) {
-        this.aritmetico.mathOperations(KMdict, HMint, HMdouble, HMstring, HMboolean, linhaSplit, linhaNumero);
+        retornoA = this.aritmetico.mathOperations(KMdict, HMint, HMdouble, HMstring, HMboolean, linhaSplit, linhaNumero);
+
+        if (!retornoA.equals("")) {
+          System.out.println("IF FOI VERDADEIRO");
+        }
         continue;
       }
 
       /* se o programa chegou ate aqui significa que nao estamos trabalhando com
       uma expressao aritimetica mas sim, algum caso de declaracao, inicializacao de variavel */
-      this.estatico.variableMethods(KMdict, HMint, HMdouble, HMstring, HMboolean, linhaSplit, linhaNumero);
+      retornoV = this.estatico.variableMethods(KMdict, HMint, HMdouble, HMstring, HMboolean, linhaSplit, linhaNumero);
+      if (!retornoV.equals("")) {
+        retornoA = this.aritmetico.mathOperations(KMdict, HMint, HMdouble, HMstring, HMboolean, retornoV.split(" "), linhaNumero);
+        System.out.println(retornoA);
+      }
     }
   }
 }
