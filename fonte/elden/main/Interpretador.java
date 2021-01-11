@@ -21,13 +21,11 @@ public class Interpretador {
 
   /* dicionario com as chaves-valores */
   KeyMap KMdict = new KeyMap();
-
   /* diferentes HashMap's para salvar cada tipo de variavel */
   HashMap<String, TipoInteiro>  HMint     = new HashMap<String, TipoInteiro>();
   HashMap<String, TipoDouble>   HMdouble  = new HashMap<String, TipoDouble>();
   HashMap<String, TipoString>   HMstring  = new HashMap<String, TipoString>();
   HashMap<String, TipoBooleano> HMboolean = new HashMap<String, TipoBooleano>();
-
 
   /* inicializa o dicionario contendo as chaves-valor */
   private void setDict() {
@@ -65,8 +63,8 @@ public class Interpretador {
       // verifica se eh ou nao uma linha comentada por '//', se termina em '.'
       if(verificaContinuidadeLinha(linha)) continue;
 
-      /* se a linha comeca com letra maiucula, significa que eh uma variavel
-      entao metodos aritmeticos sao chamados */
+      /* se a linha comeca com letra maiuscula, significa que eh uma variavel
+      entao metodos aritmeticos serao chamados */
       if(startWithUpperCase(linhaSplit[0])) {
         this.aritmetico.mathOperations(KMdict, HMint, HMdouble, HMstring, HMboolean, linhaSplit, linhaNumero);
         continue;

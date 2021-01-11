@@ -1,22 +1,18 @@
 package fonte.elden.main;
 
-import java.util.HashMap;
-import java.util.Scanner;
 /* importa os tipos primitivos de variaveis */
 import fonte.elden.vars.*;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Estatico {
-
-  Estatico() {
-  }
 
   /* metodo responsavel pela identificacao das palavras-chaves
   para que as variaveis possam ser declaradas, inicializadas
   e tambem alguns outros metodos estaticos */
-  public void variableMethods(
-    KeyMap KMdict, HashMap<String, TipoInteiro> HMint, HashMap<String, TipoDouble> HMdouble,
-    HashMap<String, TipoString> HMstring, HashMap<String, TipoBooleano> HMboolean,
-    String[] linha, int linhaIndex) {
+  public void variableMethods(KeyMap KMdict, HashMap<String, TipoInteiro> HMint,
+    HashMap<String, TipoDouble> HMdouble, HashMap<String, TipoString> HMstring,
+    HashMap<String, TipoBooleano> HMboolean, String[] linha, int linhaIndex) {
 
     linhaIndex += 1;
     String method = linha[0];

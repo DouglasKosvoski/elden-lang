@@ -1,23 +1,16 @@
 package fonte.elden.main;
 
-import java.util.HashMap;
 /* importa os tipos primitivos de variaveis */
 import fonte.elden.vars.*;
-/* importa o dicionario com a chave-valor */
-import fonte.elden.main.KeyMap;
+import java.util.HashMap;
 
 public class Aritmetico {
 
-  Aritmetico() {
-
-  }
-
   /* responsavel por realizar todas as funcoes matematicas
   como por exemplo: adicao, subtracao, multiplicacao, divisao e comparacoes */
-  public void mathOperations(
-    KeyMap KMdict, HashMap<String, TipoInteiro> HMint, HashMap<String, TipoDouble> HMdouble,
-    HashMap<String, TipoString> HMstring, HashMap<String, TipoBooleano> HMboolean,
-    String[] linha, int linhaIndex) {
+  public void mathOperations(KeyMap KMdict, HashMap<String, TipoInteiro> HMint,
+    HashMap<String, TipoDouble> HMdouble, HashMap<String, TipoString> HMstring,
+    HashMap<String, TipoBooleano> HMboolean, String[] linha, int linhaIndex) {
 
     /* soma 1, uma vez que a linha numero 0 nao existe */
     linhaIndex += 1;
