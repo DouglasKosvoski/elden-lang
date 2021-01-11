@@ -74,7 +74,7 @@ public class Interpretador {
 
       /* se o programa chegou ate aqui significa que nao estamos trabalhando com
       uma expressao aritimetica mas sim, algum caso de declaracao, inicializacao de variavel */
-      this.estatico.variableMethods(HMint, HMdouble, HMstring, HMboolean, linhaSplit, linhaNumero);
+      this.estatico.variableMethods(KMdict, HMint, HMdouble, HMstring, HMboolean, linhaSplit, linhaNumero);
     }
   }
 }

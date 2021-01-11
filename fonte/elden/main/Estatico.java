@@ -14,7 +14,7 @@ public class Estatico {
   para que as variaveis possam ser declaradas, inicializadas
   e tambem alguns outros metodos estaticos */
   public void variableMethods(
-    HashMap<String, TipoInteiro> HMint, HashMap<String, TipoDouble> HMdouble,
+    KeyMap KMdict, HashMap<String, TipoInteiro> HMint, HashMap<String, TipoDouble> HMdouble,
     HashMap<String, TipoString> HMstring, HashMap<String, TipoBooleano> HMboolean,
     String[] linha, int linhaIndex) {
 
@@ -24,26 +24,26 @@ public class Estatico {
 
     /* responsavel por indentificar qual metodo esta sendo executado
     seja declaracao, inicializacao ou mesmo print */
-    if (method.equals("summon")) {
+    if (method.equals(KMdict.getValue("declaration"))) {
       tipo = linha[1];
       varName = linha[2].replace(".", "");
 
-      if (tipo.equals("int")) {
+      if (tipo.equals(KMdict.getValue("tInt"))) {
         TipoInteiro intVar = new TipoInteiro();
         intVar.setNome(varName);
         HMint.put(varName, intVar);
       }
-      else if (tipo.equals("double")) {
+      else if (tipo.equals(KMdict.getValue("tDouble"))) {
         TipoDouble doubleVar = new TipoDouble();
         doubleVar.setNome(varName);
         HMdouble.put(varName, doubleVar);
       }
-      else if (tipo.equals("string")) {
+      else if (tipo.equals(KMdict.getValue("tString"))) {
         TipoString stringVar = new TipoString();
         stringVar.setNome(varName);
         HMstring.put(varName, stringVar);
       }
-      else if (tipo.equals("boolean")) {
+      else if (tipo.equals(KMdict.getValue("tBool"))) {
         TipoBooleano booleanVar = new TipoBooleano();
         booleanVar.setNome(varName);
         HMboolean.put(varName, booleanVar);
@@ -51,7 +51,7 @@ public class Estatico {
     }
 
     // Variable Inicialization
-    else if (method.equals("cast")) {
+    else if (method.equals(KMdict.getValue("inicialization"))) {
       varName = linha[1];
       String valorString = linha[3].replace(".", "");
       int valorNumerico = linha[3].replace(".", "").length();
@@ -71,7 +71,7 @@ public class Estatico {
     }
 
     // Print Variable Value
-    else if (method.equals("reveal")) {
+    else if (method.equals(KMdict.getValue("print"))) {
       varName = linha[1].replace(".", "");
 
       if (HMint.containsKey(varName)) {
@@ -92,7 +92,7 @@ public class Estatico {
     }
     // Recebe um imput do teclado
 
-    else if (method.equals("input")) {
+    else if (method.equals(KMdict.getValue("input"))) {
       varName = linha[1].replace(".", "");
       Scanner keyboard = new Scanner(System.in);
       String asd = keyboard.nextLine();

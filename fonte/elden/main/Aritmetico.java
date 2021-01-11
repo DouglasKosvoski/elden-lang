@@ -56,7 +56,7 @@ public class Aritmetico {
       valorString = linha[2].replace(".", "");
     }
 
-    if(linha[2].equals("unlike")) {
+    if(linha[2].equals(KMdict.getValue("different"))) {
       operation = linha[2];
       valorNumerico = linha[3].replace(".", "").length();
       valorString = linha[3].replace(".", "");
