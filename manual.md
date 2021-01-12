@@ -7,10 +7,10 @@ Elden-lang é uma linguagem um pouco fora do "convencional", nela nenhum número
 desenvolvidos, apenas palavras-chaves e um pouquinho de criatividade são necessárias.
 
 ## Motivação
-Todos sabemos que programar e/ou desenvolver exige tanto raciocinio lógico quanto
+Todos sabemos que programar e/ou desenvolver exige tanto raciocínio lógico quanto
 criatividade para solucionar os problemas do cotidiano e com isso em mente, tivemos
-a idéia de elevar o nível instigando a criatividade, o raciocinio lógico, 
-mas também a produção literária, onde através de palavras, frases ou texto, o desenvolvedor(a) além de criar programas complexos vai também se aventurar em sua propria imaginação para criar histórias fantasticas que também poderiam ser utilizadas
+a ideia de elevar o nível instigando a criatividade, o raciocínio lógico, 
+mas também a produção literária, onde através de palavras, frases ou texto, o desenvolvedor(a) além de criar programas complexos vai também se aventurar em sua própria imaginação para criar histórias fantásticas que também poderiam ser utilizadas
 no meio literário.
 
 **Vale frisar que por meio disso todas as linhas, salvo exceções, precisam terminar com um ponto final "." ;**
@@ -25,7 +25,7 @@ Elden-lang tem suporte completo a **todos** os tipos primitivos de variáveis: *
 A declaração de variáveis se dá pelo uso da palavra-chave '**summon**'
 exemplo: ```summon int Guerreiro.``` <br>
 
->Primeiramente, temos o uso da palavra-chave `summon` acrescido de outra palavra-chave, mas agora relacionada ao tipo primitivo da variável, `int` e por consequência o nome da variavel em si `Guerreiro`, note a letra Maiuscula no seu início.
+>Primeiramente, temos o uso da palavra-chave `summon` acrescido de outra palavra-chave, mas agora relacionada ao tipo primitivo da variável, `int` e por consequência o nome da variavel em si `Guerreiro`, note a letra Maiúscula no seu início.
 
 Exemplos:
 ```
@@ -50,12 +50,12 @@ A Inicialização de variáveis se dá pelo uso da palavra-chave '**cast**'. <br
 Exemplo: 
 > ```cast Water as liquid.``` <br>
 
-Você deve estar se perguntando: **"Se Water é um inteiro, cadê a atribução de seu valor?"**. <br>
+Você deve estar se perguntando: **"Se Water é um inteiro, cadê a atribuição de seu valor?"**. <br>
 E é nessa parte que Elden-lang foge ao padrão, perceba a ultima palavra do exemplo anterior, ***liquid***, é ali que acontece sua atribuição, o valor da variável é a quantidade de caracteres utilizados. <br>
-Entao o valor de **Water** é 6 (por quê ***liquid*** possui 6 letras)... <br>
+Então o valor de **Water** é 6 (por quê ***liquid*** possui 6 letras) ... <br>
 >***Nota o ponto no final da frase não acrescenta ao valor da variável em questão***.
 
->Primeiramente temos o uso da palavra-chave `cast` acrescido da ***Variavel*** a qual se deseja inicializar, palavra-chave ***as*** para dar sentido a frase e por final seu valor, por meio do *length* da ultima palavra.
+>Primeiramente temos o uso da palavra-chave `cast` acrescido da ***Variável*** a qual se deseja inicializar, palavra-chave ***as*** para dar sentido a frase e por final seu valor, por meio do *length* da última palavra.
 
 Exemplos:
 ```
