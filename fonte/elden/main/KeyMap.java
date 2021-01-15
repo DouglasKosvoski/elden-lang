@@ -2,6 +2,24 @@ package fonte.elden.main;
 
 import java.util.HashMap;
 
+/*
+  Classe responsável pela configuração chave-valor de todas as keywords utilizadas
+  na elden-lang.
+
+  Motivação: visando o crescimento e expansão da linguagem para outros idiomas,
+  a facilidade de acesso e acessibilidade se resume em apenas traduzir essas
+  keywords pré-definidas para o idioma em questão.
+
+  Métodos suportados:
+    createDict // adiciona os valores ao HashMap
+    getValue   // retorna o valor a partir da chave passada
+    getHashMap // retorna todo o HashMap
+
+  Chamada pelo Interpretador.
+
+  @autor Douglas Kosvoski <douglas.contactpro@gmail.com>.
+*/
+
 public class KeyMap {
   /* HashMap que sera utilizado como dicionario ao longo da execucao */
   private HashMap<String, String>  HMkeymap = new HashMap<String, String>();

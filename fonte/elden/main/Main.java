@@ -2,6 +2,18 @@ package fonte.elden.main;
 
 import fonte.elden.main.Leitor;
 
+/*
+  Classe responsável pela chamada do Leitor (o qual vai analisar e executar o código),
+  e por verificações do arquivo passado.
+
+  Métodos suportados:
+    foiPassadoArgumento  // Verifica se foi passado algum arquivo como argumento ao programa.
+    verificaExtensao     // Verifica se a extensão do arquivo passado é suportada.
+    Executa              // Faz a chamada do Leitor responsável por analisar e executar o código.
+
+  @autor Douglas Kosvoski <douglas.contactpro@gmail.com>.
+*/
+
 public class Main {
   public static void main(String[] args) {
     /* Se nenhum arquivo foi passado o programa se encerra */

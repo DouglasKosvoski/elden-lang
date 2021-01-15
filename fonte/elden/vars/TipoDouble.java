@@ -2,6 +2,21 @@ package fonte.elden.vars;
 
 import java.lang.Math;
 
+/*
+  Classe responsável pela variável primitiva Double, extende a classe mãe Variavel.
+
+  Chamada por outras classes como:
+    Interpretador, Aritmético e Estático.
+
+  Métodos suportados:
+    getValor, setValor, +, -, *, /, ==, >, >=, <, <=, !=, %, ^.
+
+  Valor Default:
+    0.0
+
+  @autor Guilherme Nerling <guilherme.devon@hotmail.com>.
+*/
+
 public class TipoDouble extends Variavel {
 	private double valor;
 

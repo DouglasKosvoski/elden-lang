@@ -1,5 +1,20 @@
 package fonte.elden.vars;
 
+/*
+  Classe Mãe (Raiz) de todas as Variáveis derivadas por ela.
+  Por exemplo:
+    Int, Double, String, Boolean.
+
+
+  Métodos suportados:
+    getValor, setValor, +, -, *, /, ==, >, >=, <, <=, !=, %, ^.
+
+  Valor Default:
+    0.0
+
+  @autor Guilherme Nerling <guilherme.devon@hotmail.com>.
+*/
+
 public class Variavel {
   private String nome;
   private String tipo;

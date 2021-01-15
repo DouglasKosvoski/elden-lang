@@ -4,8 +4,17 @@ package fonte.elden.main;
 import fonte.elden.vars.*;
 import java.util.HashMap;
 
-public class Aritmetico {
+/*
+  Classe responsável por classificar e interpretar métodos
+  relacionados a matemática.
 
+  Responsável por toda a lógica relacionada a qual método será chamada
+  dependendo do tipo primitivo da variável.
+
+  @autor Douglas Kosvoski <douglas.contactpro@gmail.com>.
+*/
+
+public class Aritmetico {
   /* responsavel por realizar todas as funcoes matematicas
   como por exemplo: adicao, subtracao, multiplicacao, divisao e comparacoes */
   public void mathOperations(KeyMap KMdict, HashMap<String, TipoInteiro> HMint,

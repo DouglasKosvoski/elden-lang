@@ -1,5 +1,20 @@
 package fonte.elden.vars;
 
+/*
+  Classe responsável pela variável primitiva Booleana, extende a classe mãe Variavel.
+
+  Chamada por outras classes como:
+    Interpretador, Aritmético e Estático.
+
+  Métodos suportados:
+    getValor, setValor, ==, !=.
+
+  Valor Default:
+    false.
+
+  @autor Guilherme Nerling <guilherme.devon@hotmail.com>.
+*/
+
 public class TipoBooleano extends Variavel {
   private boolean valorLogico;
 

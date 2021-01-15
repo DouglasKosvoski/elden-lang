@@ -5,8 +5,14 @@ import fonte.elden.vars.*;
 import java.io.*;
 import java.util.*;
 
-public class Estatico {
+/*
+  Classe responsável por classificar e interpretar métodos relacionados
+  a declaração e inicialização de váriaveis, bem como input e output de valores.
 
+  @autor Douglas Kosvoski <douglas.contactpro@gmail.com>.
+*/
+
+public class Estatico {
   /* metodo responsavel pela identificacao das palavras-chaves
   para que as variaveis possam ser declaradas, inicializadas
   e tambem alguns outros metodos estaticos */

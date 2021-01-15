@@ -11,6 +11,17 @@ import fonte.elden.main.KeyMap;
 import fonte.elden.main.Estatico;
 import fonte.elden.main.Aritmetico;
 
+/*
+  Classe responsável por analisar e interpretar o código passado.
+
+  Métodos suportados:
+    startWithUpperCase         // verifica se a linha começa com letra maiúscula.
+    verificaContinuidadeLinha  // verifica se a linha é um comentário ou se deve ser interpretada.
+    interpreta                 // interpreta a linha de código em questão.
+
+  @autor Douglas Kosvoski <douglas.contactpro@gmail.com>.
+*/
+
 public class Interpretador {
   private Estatico estatico = new Estatico();
   private Aritmetico aritmetico = new Aritmetico();
