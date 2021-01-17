@@ -6,15 +6,15 @@ summon boolean E.
 
 cast A as candy crush.
 cast B as fire and flames.
-cast C as douglas kosvoski.
+cast C as random name.
 cast D as true.
 cast E as false.
 
-reveal A.
-reveal B.
-reveal C.
-reveal D.
-reveal E.
+//reveal A.
+//reveal B.
+//reveal C.
+//reveal D.
+//reveal E.
 
 // INTEGER
 //A ascend by wind.
